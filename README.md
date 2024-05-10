@@ -35,8 +35,8 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 
 Technologies used-JavaScript ES 13 ,CSS 3, and HTML 5
-Usage: learning how to showcase skills with API
-Credits: Collaboration with Jose Lopez, MD, W3 schools and Open Weather Map for API's
+Usage: learning how to showcase skills with Node JS, Inquirer, and Postgres SQL.
+Credits: Collaboration with tutor, MD, W3 schools, and postgresql.org 
 Liscense-MIT in repo
 
 
@@ -49,4 +49,4 @@ Liscense-MIT in repo
 change this for the new screenshot
 
 
-[A full size screen shot of application chrome_Bootcamp24_Weather_index.html.png]
+[A full size screen shot of application ]
