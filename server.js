@@ -157,21 +157,44 @@ function addRole(){
 function updateemployee(){
     connection.query("SELECT * FROM employee", (err, res) => {
         if (err) throw err;
-const employeechoices = res.rows.map (item =>({
-    name:`${item.first_name} ${item.last_name}`, value:item.id
-}))
+const employeechoices = res.rows.map (item => item.first_name + " " + item.last_name)
 inquirer.prompt([
     {
         type:"list",
-        name:"employee choice",
+        name:"employee_choice",
         message:"Which employee would you like to update?",
-        choices:employeechoices
+        choices: employeechoices
+
     }
-]).then
+]).then (answer =>{
+    const chosenEmployee = res.rows.find(item => item.first_name + " " + item.last_name === answer.employee_choice)
+    console.log(chosenEmployee)
+    connection.query("SELECT * FROM role", (err, res) => {
+      
+      
+        inquirer.prompt([
+            {
+                type:"list",
+                name:"employee_role",
+                message:"What role would you like?",
+                choices: res.rows.map(item => item.title)
+        
+            }
+        ]).then(answer =>{
+            const chosenRole = res.rows.find(item => item.title === answer.employee_role)
+            console.log(chosenRole)
+            connection.query ("UPDATE employee SET role_id = $1 WHERE id = $2",[chosenRole.id, chosenEmployee.id])
+            start()
+
+        }
+
+        )
+    })
+})
 
 })
         
-        start()
+     
     }
 
 

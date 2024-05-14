@@ -44,9 +44,5 @@ Liscense-MIT in repo
 
 
 
+screenshot:
 
-
-change this for the new screenshot
-
-
-[A full size screen shot of application ]
