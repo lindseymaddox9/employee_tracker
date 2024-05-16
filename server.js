@@ -21,7 +21,7 @@ function start(){
             type: "list",
             message: "What would you like to do?",
             name: "prompt",
-            choices:["Show All Departments", "Show All Roles", "Show All Employees", "Add Department", "Add Role", "Add Employee", "Update Employee Role"]
+            choices:["Show All Departments", "Show All Roles", "Show All Employees", "Add Department", "Add Role", "Add Employee", "Update Employee Role", "Exit"]
         }
     ]).then(answer => {
 
@@ -40,8 +40,14 @@ function start(){
         else if(answer.prompt === "Add Role"){
             addRole()
         }
+        else if(answer.prompt === "Add Employee"){
+            addEmployee()
+        }
         else if(answer.prompt === "Update Employee Role"){
             updateemployee()
+        }
+        else if(answer.prompt === "Exit"){
+            connection.end()
         }
     })
 }
@@ -121,30 +127,30 @@ function addRole(){
     })
 }
 
-function addRole(){
+function addEmployee(){
     inquirer.prompt([
         {
             type: "input",
-            name: "newRole",
-            message: "What role are you adding?"
+            name: "firstName",
+            message: "What is the first name of the new employee?"
         },
 
         {
             type: "input",
-            name: "newSalary",
-            message: "What is your salary?"
+            name: "lastName",
+            message: "What is the last name of the new employee?"
         },
 
         {
             type: "input",
-            name: "newDepartment_id",
-            message: "What is your department id?"
+            name: "roleId",
+            message: "What is your role id?"
         },
 
 
     ]).then(response =>{
-        connection.query("INSERT INTO role (first name, last name, employee role) VALUES($1, $2, $3)",
-         [response.firstName, response.lastName, response.employeeRole_id])
+        connection.query("INSERT INTO employee (first_name, last_name, role_id) VALUES($1, $2, $3)",
+         [response.firstName, response.lastName, response.roleId])
          .then((err) => {
           
              console.log("Employee Added!")
@@ -196,11 +202,5 @@ inquirer.prompt([
         
      
     }
-
-
-//update employee table by resetting the a chosen role id of the chosen employee (id)
-//UPDATE employee SET role_id = ? WHERE id = ?
-
-
 
 start()
